@@ -15,31 +15,14 @@ func printDuration(d time.Duration) {
 	)
 }
 
-// The Elapsed function prints output displaying the elapsed time since start
-// in HH:MM:SS format.
-func Elapsed() {
-	// https://gobyexample.com/tickers
-	ticker := time.NewTicker(time.Second)
-	start := time.Now()
-	go func() {
-		// https://gobyexample.com/range-over-channels
-		fmt.Printf("\r00:00:00 ")
-		for range ticker.C {
-			d := time.Since(start)
-			printDuration(d)
-		}
-	}()
-}
-
-// The Countdown function prints output displaying the remaining time
-// relative to the total, in HH:MM:SS format.
+// The Countdown function prints time remaining relative to a given total (as HH:MM:SS).
 func Countdown(d time.Duration) {
 	ticker := time.NewTicker(time.Second)
 	start := time.Now()
 	go func() {
 		printDuration(d)
 		for range ticker.C {
-			remaining := d - time.Since(start)
+			remaining := d - time.Since(start) + time.Second
 			if remaining >= 0.0 {
 				printDuration(remaining)
 			} else {
@@ -50,9 +33,16 @@ func Countdown(d time.Duration) {
 	}()
 }
 
-func exitOnNewline() {
-	var input string
-	fmt.Scanln(&input)
+// The Elapsed function prints elapsed time as HH:MM:SS.
+func Elapsed() {
+	ticker := time.NewTicker(time.Second)
+	start := time.Now()
+	go func() {
+		fmt.Printf("\r00:00:00 ")
+		for range ticker.C {
+			printDuration(time.Since(start))
+		}
+	}()
 }
 
 func main() {
@@ -67,5 +57,6 @@ func main() {
 		Elapsed()
 	}
 
-	exitOnNewline()
+	var input string
+	fmt.Scanln(&input)
 }
