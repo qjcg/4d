@@ -16,33 +16,27 @@ func printDuration(d time.Duration) {
 }
 
 // The Countdown function prints time remaining relative to a given total (as HH:MM:SS).
-func Countdown(d time.Duration) {
-	ticker := time.NewTicker(time.Second)
+func Countdown(ticker *time.Ticker, d time.Duration) {
 	start := time.Now()
-	go func() {
-		printDuration(d)
-		for range ticker.C {
-			remaining := d - time.Since(start) + time.Second
-			if remaining >= 0.0 {
-				printDuration(remaining)
-			} else {
-				fmt.Println()
-				os.Exit(0)
-			}
+	printDuration(d)
+	for range ticker.C {
+		remaining := d - time.Since(start) + time.Second
+		if remaining >= 0.0 {
+			printDuration(remaining)
+		} else {
+			fmt.Println()
+			os.Exit(0)
 		}
-	}()
+	}
 }
 
 // The Elapsed function prints elapsed time as HH:MM:SS.
-func Elapsed() {
-	ticker := time.NewTicker(time.Second)
+func Elapsed(ticker *time.Ticker) {
 	start := time.Now()
-	go func() {
-		fmt.Printf("\r00:00:00 ")
-		for range ticker.C {
-			printDuration(time.Since(start))
-		}
-	}()
+	fmt.Printf("\r00:00:00 ")
+	for range ticker.C {
+		printDuration(time.Since(start))
+	}
 }
 
 func main() {
@@ -51,10 +45,12 @@ func main() {
 	countdown := flag.Duration("c", time.Second*0, "countdown (duration)")
 	flag.Parse()
 
+	ticker := time.NewTicker(time.Second)
+
 	if *countdown >= time.Second {
-		Countdown(*countdown)
+		go Countdown(ticker, *countdown)
 	} else {
-		Elapsed()
+		go Elapsed(ticker)
 	}
 
 	var input string
