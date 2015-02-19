@@ -1,6 +1,6 @@
 # Timer
 
-A simple CLI timer.
+A simple, lightweight CLI timer.
 
 # Usage
 
