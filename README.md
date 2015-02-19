@@ -2,13 +2,13 @@
 
 A simple, lightweight CLI timer.
 
-# Install
+## Install
 
 ```sh
 go get github.com/qjcg/timer
 ```
 
-# Usage
+## Usage
 
 Display countdown:
 
