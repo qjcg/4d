@@ -1,4 +1,4 @@
-# Timer
+# 4d
 
 A simple, lightweight CLI stopwatch.
 
