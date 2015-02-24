@@ -38,8 +38,6 @@ func Elapsed(ticker *time.Ticker) {
 }
 
 func main() {
-	// TODO
-	//alarm := flag.String("a", "", "alarm filename")
 	countdown := flag.Duration("c", time.Second*0, "countdown (duration)")
 	flag.Parse()
 
