@@ -1,11 +1,11 @@
 # Timer
 
-A simple, lightweight CLI timer.
+A simple, lightweight CLI stopwatch.
 
 ## Install
 
 ```sh
-go get github.com/qjcg/timer
+go get github.com/qjcg/4d
 ```
 
 ## Usage
@@ -13,13 +13,13 @@ go get github.com/qjcg/timer
 Display countdown:
 
 ```sh
-timer -c 5m
+4d -c 5m
 ```
 
 Display elapsed time:
 
 ```sh
-timer
+4d
 ```
 
 Return key exits.
