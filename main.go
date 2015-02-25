@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// prints given duration as HH:MM:SS
 func printDuration(d time.Duration) {
 	fmt.Printf("\r%02d:%02d:%02d ",
 		int(d.Hours())%60,
@@ -15,7 +16,7 @@ func printDuration(d time.Duration) {
 	)
 }
 
-// The Countdown function prints time remaining relative to a given total (as HH:MM:SS).
+// The Countdown function prints time remaining relative to a given total
 func Countdown(ticker *time.Ticker, d time.Duration) {
 	start := time.Now()
 	for range ticker.C {
@@ -29,7 +30,7 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 	}
 }
 
-// The Elapsed function prints elapsed time as HH:MM:SS.
+// The Elapsed function prints elapsed time
 func Elapsed(ticker *time.Ticker) {
 	start := time.Now()
 	for range ticker.C {
