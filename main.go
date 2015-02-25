@@ -41,7 +41,10 @@ func main() {
 	countdown := flag.Duration("c", time.Second*0, "countdown (duration)")
 	flag.Parse()
 
-	ticker := time.NewTicker(time.Second)
+	// - set tick lower than than the smallest unit of interest (1s) to
+	// mitigate output "skips" due to missed ticks
+	// - related issue: https://github.com/golang/go/issues/3516
+	ticker := time.NewTicker(time.Second / 2)
 
 	if *countdown >= time.Second {
 		go Countdown(ticker, *countdown)
