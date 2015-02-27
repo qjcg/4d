@@ -1,13 +1,21 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"time"
 )
 
-// prints given duration as HH:MM:SS
+var usage string = `4d: A simple, lightweight CLI stopwatch.
+Usage: 4d [DURATION]
+
+4d		display elapsed time
+4d 15m		countdown 15 minutes
+4d 3h2m1s	countdown 3 hours, 2 minutes, 1 second
+
+Return key exits.`
+
+// printDuration prints a given duration as HH:MM:SS.
 func printDuration(d time.Duration) {
 	fmt.Printf("\r%02d:%02d:%02d ",
 		int(d.Hours())%60,
@@ -39,16 +47,30 @@ func Elapsed(ticker *time.Ticker) {
 }
 
 func main() {
-	countdown := flag.Duration("c", time.Second*0, "countdown (duration)")
-	flag.Parse()
+	var countdown time.Duration
+	// parse duration if provided
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "-h", "-help", "--help", "help":
+			fmt.Println(usage)
+			os.Exit(0)
+		}
+
+		d, err := time.ParseDuration(os.Args[1])
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		countdown = d
+	}
 
 	// - set tick lower than than the smallest unit of interest (1s) to
 	// mitigate output "skips" due to missed ticks
 	// - related issue: https://github.com/golang/go/issues/3516
 	ticker := time.NewTicker(time.Second / 2)
 
-	if *countdown >= time.Second {
-		go Countdown(ticker, *countdown)
+	if countdown >= time.Second {
+		go Countdown(ticker, countdown)
 	} else {
 		go Elapsed(ticker)
 	}
