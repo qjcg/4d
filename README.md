@@ -5,21 +5,19 @@ A simple, lightweight CLI stopwatch.
 ## Install
 
 ```sh
-go get github.com/qjcg/4d
+go get -u github.com/qjcg/4d
 ```
 
 ## Usage
 
-Display countdown:
-
 ```sh
-4d -c 5m
-```
+$ 4d -h
+4d: A simple, lightweight CLI stopwatch.
+Usage: 4d [DURATION]
 
-Display elapsed time:
-
-```sh
-4d
-```
+4d		display elapsed time
+4d 15m		countdown 15 minutes
+4d 3h2m1s	countdown 3 hours, 2 minutes, 1 second
 
 Return key exits.
+```
