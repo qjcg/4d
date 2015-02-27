@@ -10,7 +10,7 @@ go get -u github.com/qjcg/4d
 
 ## Usage
 
-```sh
+```
 $ 4d -h
 4d: A simple, lightweight CLI stopwatch.
 Usage: 4d [DURATION]
