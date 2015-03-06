@@ -2,6 +2,9 @@
 
 A simple, lightweight CLI stopwatch.
 
+[![Build Status](https://travis-ci.org/qjcg/4d.svg?branch=master)](https://travis-ci.org/qjcg/4d)
+
+
 ## Install
 
 ```sh
