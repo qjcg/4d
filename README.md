@@ -11,11 +11,12 @@ A simple, lightweight CLI stopwatch.
 go get -u github.com/qjcg/4d
 ```
 
+
 ## Usage
 
 ```
 $ 4d -h
-4d: A simple, lightweight CLI stopwatch.
+A simple, lightweight CLI stopwatch.
 Usage: 4d [DURATION]
 
 4d		display elapsed time
