@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var usage string = `4d: A simple, lightweight CLI stopwatch.
+var usage string = `A simple, lightweight CLI stopwatch.
 Usage: 4d [DURATION]
 
 4d		display elapsed time
