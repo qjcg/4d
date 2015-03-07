@@ -1,8 +1,6 @@
-# 4d
+# 4d [![Build Status][build-logo]][travis-4d]
 
 A simple, lightweight CLI stopwatch.
-
-[![Build Status](https://travis-ci.org/qjcg/4d.svg?branch=master)](https://travis-ci.org/qjcg/4d)
 
 
 ## Install
@@ -25,3 +23,6 @@ Usage: 4d [DURATION]
 
 Return key exits.
 ```
+
+[build-logo]: https://travis-ci.org/qjcg/4d.svg?branch=master
+[travis-4d]: https://travis-ci.org/qjcg/4d
