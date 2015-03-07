@@ -10,7 +10,7 @@ go get -u github.com/qjcg/4d
 ```
 
 
-## Usage
+## Use
 
 ```
 $ 4d -h
