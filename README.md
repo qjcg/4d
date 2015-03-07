@@ -1,6 +1,6 @@
 # 4d [![Build Status][build-logo]][travis-4d]
 
-A simple, lightweight CLI stopwatch.
+A simple CLI stopwatch.
 
 
 ## Install
@@ -14,7 +14,7 @@ go get -u github.com/qjcg/4d
 
 ```
 $ 4d -h
-A simple, lightweight CLI stopwatch.
+A simple CLI stopwatch.
 Usage: 4d [DURATION]
 
 4d		display elapsed time
