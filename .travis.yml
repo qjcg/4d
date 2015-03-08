@@ -3,12 +3,12 @@ go:
   - 1.4
   - tip
 after_script:
-  - zip linux_amd64.zip $HOME/gopath/bin/4d
+  - tar -zcf /tmp/4d_linux_amd64.tar.gz $HOME/gopath/bin/4d
 deploy:
   provider: releases
   api_key:
     secure: "MmTHxUHULtl0rLISydkYzLejeaHowMv0HW3T5QWfLNr2lU8LbQjQagcz8obSVxTSxbpSBLgGtS4acWaVW+EoEMTzpl+CBF3Ez9Op1FW3dq3m5b6Rpbko09F8qqt2W9MTLVXwDO6ccxLjxpIoyWbcF/hGdwwmR40Bz/pwjwC3AmI="
-  file: "./linux_amd64.zip"
+  file: "/tmp/4d_linux_amd64.tar.gz"
   skip_cleanup: true
   on:
     tags: true
