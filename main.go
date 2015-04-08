@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-var usage string = `A simple CLI stopwatch.
+const usage string = `A simple CLI stopwatch.
 Usage: 4d [DURATION]
 
 4d		display elapsed time
@@ -48,6 +48,7 @@ func Elapsed(ticker *time.Ticker) {
 
 func main() {
 	var countdown time.Duration
+
 	// parse duration if provided
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
@@ -65,7 +66,7 @@ func main() {
 	}
 
 	// - set tick lower than than the smallest unit of interest (1s) to
-	// mitigate output "skips" due to missed ticks
+	//   mitigate output "skips" due to missed ticks
 	// - related issue: https://github.com/golang/go/issues/3516
 	ticker := time.NewTicker(time.Second / 2)
 
