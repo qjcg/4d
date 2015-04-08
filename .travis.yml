@@ -11,7 +11,7 @@ after_success:
 deploy:
   provider: releases
   api_key:
-    secure: MmTHxUHULtl0rLISydkYzLejeaHowMv0HW3T5QWfLNr2lU8LbQjQagcz8obSVxTSxbpSBLgGtS4acWaVW+EoEMTzpl+CBF3Ez9Op1FW3dq3m5b6Rpbko09F8qqt2W9MTLVXwDO6ccxLjxpIoyWbcF/hGdwwmR40Bz/pwjwC3AmI=
+    secure: TM+NFPZr3tiVOwxkbc3QZdJysrXwBw6hOMWuGvTMR9tacSlVmO6/93Wg8mdeo13sr+nGDUkb4YWrIsELT3w2e4W2P6cEMyIuSywFyEm9bG/9MQc0T28P3sTncWzsGzCzMs3lrOdeIuncjyzyV9hpXvl8Z4qYUlGuQqitjkJkGak=
   file: /tmp/4d_linux_amd64.tar.gz
   on:
     tags: true
