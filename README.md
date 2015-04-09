@@ -9,6 +9,8 @@ A simple CLI stopwatch.
 go get -u github.com/qjcg/4d
 ```
 
+Alternatively, you can download the [latest binary release here].
+
 
 ## Use
 
@@ -26,3 +28,4 @@ Return key exits.
 
 [build-logo]: https://travis-ci.org/qjcg/4d.svg?branch=master
 [travis-4d]: https://travis-ci.org/qjcg/4d
+[latest binary release here]: https://github.com/qjcg/4d/releases/latest
