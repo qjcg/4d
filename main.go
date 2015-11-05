@@ -33,7 +33,7 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 			printDuration(remaining)
 		} else {
 			fmt.Println()
-			os.Exit(0)
+			return
 		}
 	}
 }
