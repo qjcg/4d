@@ -25,7 +25,8 @@ func printDuration(d time.Duration) {
 }
 
 // Countdown prints time remaining relative to a given total.
-func Countdown(ticker *time.Ticker, d time.Duration, start time.Time) {
+func Countdown(ticker *time.Ticker, d time.Duration) {
+	start := time.Now()
 	for range ticker.C {
 		remaining := d - time.Since(start) + time.Second
 		if remaining >= 0.0 {
@@ -37,7 +38,7 @@ func Countdown(ticker *time.Ticker, d time.Duration, start time.Time) {
 	}
 }
 
-// Elapsed prints the duration since the function was called.
+// Elapsed prints the duration since the provided start time.
 func Elapsed(ticker *time.Ticker, start time.Time) {
 	for range ticker.C {
 		printDuration(time.Since(start))
@@ -69,7 +70,7 @@ func main() {
 	ticker := time.NewTicker(time.Second / 2)
 
 	if countdown >= time.Second {
-		go Countdown(ticker, countdown, time.Now())
+		go Countdown(ticker, countdown)
 	} else {
 		go Elapsed(ticker, time.Now())
 	}
