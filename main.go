@@ -74,6 +74,5 @@ func main() {
 		go Elapsed(ticker, time.Now())
 	}
 
-	var input string
-	fmt.Scanln(&input)
+	fmt.Scanln()
 }
