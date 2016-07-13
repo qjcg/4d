@@ -32,7 +32,6 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 		if remaining >= 0.0 {
 			printDuration(remaining)
 		} else {
-			fmt.Println()
 			return
 		}
 	}
@@ -69,11 +68,10 @@ func main() {
 	// - related issue: https://github.com/golang/go/issues/3516
 	ticker := time.NewTicker(time.Second / 2)
 
+	defer fmt.Println()
 	if countdown >= time.Second {
 		go Countdown(ticker, countdown)
 	} else {
 		go Elapsed(ticker, time.Now())
 	}
-
-	fmt.Scanln()
 }
