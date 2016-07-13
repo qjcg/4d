@@ -26,3 +26,8 @@ Return key exits.
 
 [build-logo]: https://travis-ci.org/qjcg/4d.svg?branch=master
 [travis-4d]: https://travis-ci.org/qjcg/4d
+
+
+## License
+
+MIT.
