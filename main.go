@@ -13,7 +13,7 @@ Usage: 4d [DURATION]
 4d 15m		countdown 15 minutes
 4d 3h2m1s	countdown 3 hours, 2 minutes, 1 second
 
-Return key exits.`
+Ctrl-C exits.`
 
 // printDuration prints a given duration as HH:MM:SS.
 func printDuration(d time.Duration) {
