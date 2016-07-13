@@ -70,8 +70,8 @@ func main() {
 
 	defer fmt.Println()
 	if countdown >= time.Second {
-		go Countdown(ticker, countdown)
+		Countdown(ticker, countdown)
 	} else {
-		go Elapsed(ticker, time.Now())
+		Elapsed(ticker, time.Now())
 	}
 }
