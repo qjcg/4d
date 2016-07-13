@@ -51,7 +51,7 @@ func main() {
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "-h", "-help", "--help", "help":
-			fmt.Println(usage)
+			fmt.Printf("\n%s\n\n", usage)
 			os.Exit(0)
 		}
 
