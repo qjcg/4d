@@ -27,6 +27,8 @@ func printDuration(d time.Duration) {
 // Countdown prints time remaining relative to a given total.
 func Countdown(ticker *time.Ticker, d time.Duration) {
 	start := time.Now()
+	end := start.Add(d)
+	fmt.Println("Counting until:", end)
 	for range ticker.C {
 		remaining := d - time.Since(start) + time.Second
 		if remaining >= 0.0 {
@@ -68,10 +70,10 @@ func main() {
 	// - related issue: https://github.com/golang/go/issues/3516
 	ticker := time.NewTicker(time.Second / 2)
 
-	defer fmt.Println()
-	if countdown >= time.Second {
+	switch {
+	case countdown >= time.Second:
 		Countdown(ticker, countdown)
-	} else {
+	default:
 		Elapsed(ticker, time.Now())
 	}
 }
