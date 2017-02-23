@@ -70,10 +70,9 @@ func main() {
 	// - related issue: https://github.com/golang/go/issues/3516
 	ticker := time.NewTicker(time.Second / 2)
 
-	switch {
-	case countdown >= time.Second:
+	if countdown >= time.Second {
 		Countdown(ticker, countdown)
-	default:
-		Elapsed(ticker, time.Now())
 	}
+
+	Elapsed(ticker, time.Now())
 }
