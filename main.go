@@ -51,7 +51,7 @@ func Elapsed(ticker *time.Ticker, start time.Time) {
 func main() {
 	var countdown time.Duration
 
-	// parse duration if provided
+	// Parse duration if provided.
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "-h", "-help", "--help", "help":
