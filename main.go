@@ -30,17 +30,19 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 	end := start.Add(d)
 	fmt.Println("Counting until:", end)
 	for range ticker.C {
-		remaining := d - time.Since(start) + time.Second
+		remaining := time.Until(end)
 		if remaining >= 0.0 {
 			printDuration(remaining)
 		} else {
-			return
+			break
 		}
 	}
+	fmt.Println()
 }
 
 // Elapsed prints the duration since the provided start time.
 func Elapsed(ticker *time.Ticker, start time.Time) {
+	printDuration(time.Since(start))
 	for range ticker.C {
 		printDuration(time.Since(start))
 	}
@@ -72,7 +74,7 @@ func main() {
 
 	if countdown >= time.Second {
 		Countdown(ticker, countdown)
+	} else {
+		Elapsed(ticker, time.Now())
 	}
-
-	Elapsed(ticker, time.Now())
 }
