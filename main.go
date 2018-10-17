@@ -29,12 +29,13 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 	start := time.Now()
 	end := start.Add(d)
 	fmt.Println("Counting until:", end)
-	for range ticker.C {
+	for ; true; <-ticker.C {
 		remaining := time.Until(end)
 		if remaining >= 0.0 {
 			printDuration(remaining)
 		} else {
-			break
+			fmt.Println()
+			return
 		}
 	}
 	fmt.Println()
@@ -70,7 +71,7 @@ func main() {
 	// - set tick lower than than the smallest unit of interest (1s) to
 	//   mitigate output "skips" due to missed ticks
 	// - related issue: https://github.com/golang/go/issues/3516
-	ticker := time.NewTicker(time.Second / 2)
+	ticker := time.NewTicker(time.Second)
 
 	if countdown >= time.Second {
 		Countdown(ticker, countdown)
