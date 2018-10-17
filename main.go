@@ -72,11 +72,7 @@ func main() {
 		countdown = d
 	}
 
-	// - set tick lower than than the smallest unit of interest (1s) to
-	//   mitigate output "skips" due to missed ticks
-	// - related issue: https://github.com/golang/go/issues/3516
 	ticker := time.NewTicker(time.Second)
-
 	if countdown >= time.Second {
 		Countdown(ticker, countdown)
 	} else {
