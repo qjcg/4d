@@ -1,4 +1,5 @@
-package main
+// A simple CLI stopwatch.
+package main // import "github.com/qjcg/4d"
 
 import (
 	"fmt"
@@ -6,7 +7,7 @@ import (
 	"time"
 )
 
-const usage string = `A simple CLI stopwatch.
+const usage = `A simple CLI stopwatch.
 Usage: 4d [DURATION]
 
 4d		display elapsed time
@@ -29,6 +30,9 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 	start := time.Now()
 	end := start.Add(d)
 	fmt.Println("Counting until:", end)
+
+	// This for loop style will run one iteration immediately, unlike "for
+	// range ticker.C", which waits one tick before printing anything.
 	for ; true; <-ticker.C {
 		remaining := time.Until(end)
 		if remaining >= 0.0 {
