@@ -26,7 +26,8 @@ func fmtDuration(d time.Duration) string {
 	)
 }
 
-// Countdown is a timer that writes time remaining
+// Countdown outputs time remaining relative to a starting duration at the
+// interval specified by the provided ticker.
 func Countdown(w io.Writer, ticker *time.Ticker, d time.Duration) {
 	start := time.Now()
 	// One second is added here to make the starting countdown time
@@ -49,7 +50,8 @@ func Countdown(w io.Writer, ticker *time.Ticker, d time.Duration) {
 	}
 }
 
-// Elapsed prints the duration since the provided start time.
+// Elapsed outputs the duration since *start* at the interval
+// specified by the provided ticker.
 func Elapsed(w io.Writer, ticker *time.Ticker, start time.Time) {
 	for ; true; <-ticker.C {
 		fmt.Fprint(w, fmtDuration(time.Since(start)))
