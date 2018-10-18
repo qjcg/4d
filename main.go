@@ -48,7 +48,7 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 // Elapsed prints the duration since the provided start time.
 func Elapsed(ticker *time.Ticker, start time.Time) {
 	printDuration(time.Since(start))
-	for range ticker.C {
+	for ; true; <-ticker.C {
 		printDuration(time.Since(start))
 	}
 }
