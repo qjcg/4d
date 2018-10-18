@@ -39,10 +39,9 @@ func Countdown(ticker *time.Ticker, d time.Duration) {
 			printDuration(remaining)
 		} else {
 			fmt.Println()
-			return
+			break
 		}
 	}
-	fmt.Println()
 }
 
 // Elapsed prints the duration since the provided start time.
