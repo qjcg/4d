@@ -3,6 +3,7 @@ package main // import "github.com/qjcg/4d"
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"time"
 )
@@ -16,39 +17,42 @@ Usage: 4d [DURATION]
 
 Ctrl-C exits.`
 
-// printDuration prints a given duration as HH:MM:SS.
-func printDuration(d time.Duration) {
-	fmt.Printf("\r%02d:%02d:%02d ",
+// fmtDuration returns a HH:MM:SS string representation of a duration.
+func fmtDuration(d time.Duration) string {
+	return fmt.Sprintf("\r%02d:%02d:%02d ",
 		int(d.Hours())%60,
 		int(d.Minutes())%60,
 		int(d.Seconds())%60,
 	)
 }
 
-// Countdown prints time remaining relative to a given total.
-func Countdown(ticker *time.Ticker, d time.Duration) {
+// Countdown is a timer that writes time remaining
+func Countdown(w io.Writer, ticker *time.Ticker, d time.Duration) {
 	start := time.Now()
-	end := start.Add(d)
-	fmt.Println("Counting until:", end)
+	// One second is added here to make the starting countdown time
+	// correspond to the provided duration.
+	end := start.Add(d + time.Second)
 
 	// This for loop style will run one iteration immediately, unlike "for
 	// range ticker.C", which waits one tick before printing anything.
 	for ; true; <-ticker.C {
 		remaining := time.Until(end)
-		if remaining >= 0.0 {
-			printDuration(remaining)
+		// Comparing to 1.5s avoids counting the "00:00:00" second. We
+		// added 1s to the "end" time above, so this ensures the
+		// duration of our countdown is accurate.
+		if remaining >= time.Millisecond*1500 {
+			fmt.Fprint(w, fmtDuration(remaining))
 		} else {
-			fmt.Println()
+			fmt.Fprintln(w)
 			break
 		}
 	}
 }
 
 // Elapsed prints the duration since the provided start time.
-func Elapsed(ticker *time.Ticker, start time.Time) {
-	printDuration(time.Since(start))
+func Elapsed(w io.Writer, ticker *time.Ticker, start time.Time) {
 	for ; true; <-ticker.C {
-		printDuration(time.Since(start))
+		fmt.Fprint(w, fmtDuration(time.Since(start)))
 	}
 }
 
@@ -73,8 +77,8 @@ func main() {
 
 	ticker := time.NewTicker(time.Second)
 	if countdown >= time.Second {
-		Countdown(ticker, countdown)
+		Countdown(os.Stdout, ticker, countdown)
 	} else {
-		Elapsed(ticker, time.Now())
+		Elapsed(os.Stdout, ticker, time.Now())
 	}
 }
