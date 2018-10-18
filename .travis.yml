@@ -1,16 +1,23 @@
 language: go
 go:
 - 1.x
-- master
 script:
 - go test -v
-- go install -v
+- GOARCH=amd64 go build -o 4d.amd64
+- GOARCH=arm go build -o 4d.arm
+- GOARCH=mips GOMIPS=softfloat go build -o 4d.mips
+- mv 4d* $HOME/gopath/bin/
 after_success:
-- tar -C $HOME/gopath/bin -vzcf /tmp/4d_linux_amd64.tar.gz 4d
+- tar -C $HOME/gopath/bin -vzcf /tmp/4d_linux_amd64.tgz 4d.amd64
+- tar -C $HOME/gopath/bin -vzcf /tmp/4d_linux_arm.tgz 4d.arm
+- tar -C $HOME/gopath/bin -vzcf /tmp/4d_linux_mips.tgz 4d.mips
 deploy:
   provider: releases
   api_key:
     secure: X6ihaSrHeeCunRzgOxKyfKq3063OXDT96cnwdXk/f37YXtEZM7FyC32hiAsUU9+0yfvxkBZsgaKFUk5aEpzFt5NK/fbSiCULIwaZh434HAiFNhLE/IjHyBtOp0D0m5kt6SwhP1fyr1iRS4aDfT30GgvOgDn8cjHDwafjnEGFFxQ=
-  file: /tmp/4d_linux_amd64.tar.gz
+  file:
+    - /tmp/4d_linux_amd64.tgz
+    - /tmp/4d_linux_arm.tgz
+    - /tmp/4d_linux_mips.tgz
   on:
     tags: true
