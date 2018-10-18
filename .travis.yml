@@ -1,6 +1,7 @@
 language: go
 go:
-- tip
+- 1.x
+- master
 script:
 - go test -v
 - go install -v
@@ -9,6 +10,7 @@ after_success:
 deploy:
   provider: releases
   api_key:
-    secure: 1wPlm8hmeIzwxSujAbN4E/1sCMaC8Mzo5GVRCRnmwtuhz+YszS1UJdeUwDmrOHjWrpGnGu5W01SD7ZtZxBmTVRno4R0lX7ghJ4sGAelPyXrcpBwWmkOyayrq1RyohUVe9Uk9vDny9fgkyNYxgUkUpen9DZMwXt1Sz9+o36ays6Y=
+    secure: X6ihaSrHeeCunRzgOxKyfKq3063OXDT96cnwdXk/f37YXtEZM7FyC32hiAsUU9+0yfvxkBZsgaKFUk5aEpzFt5NK/fbSiCULIwaZh434HAiFNhLE/IjHyBtOp0D0m5kt6SwhP1fyr1iRS4aDfT30GgvOgDn8cjHDwafjnEGFFxQ=
+  file: /tmp/4d_linux_amd64.tar.gz
   on:
     tags: true
