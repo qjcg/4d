@@ -2,6 +2,9 @@
 
 A simple CLI stopwatch.
 
+[build-logo]: https://travis-ci.org/qjcg/4d.svg?branch=master
+[travis-4d]: https://travis-ci.org/qjcg/4d
+
 
 ## Install
 
@@ -23,9 +26,6 @@ Usage: 4d [DURATION]
 
 Ctrl-C exits.
 ```
-
-[build-logo]: https://travis-ci.org/qjcg/4d.svg?branch=master
-[travis-4d]: https://travis-ci.org/qjcg/4d
 
 
 ## License
