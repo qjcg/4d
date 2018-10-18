@@ -1,9 +1,15 @@
-# 4d [![Build Status][build-logo]][travis-4d]
+# 4d
+
+[![Build Status][badge_build]][travis_4d]
+[![GoReportCard][badge_reportcard]][reportcard]
+
+[badge_build]: https://travis-ci.org/qjcg/4d.svg?branch=master
+[badge_reportcard]: https://goreportcard.com/badge/github.com/qjcg/4d
+[travis_4d]: https://travis-ci.org/qjcg/4d
+[reportcard]: https://goreportcard.com/report/github.com/qjcg/4d
+
 
 A simple CLI stopwatch.
-
-[build-logo]: https://travis-ci.org/qjcg/4d.svg?branch=master
-[travis-4d]: https://travis-ci.org/qjcg/4d
 
 
 ## Install
