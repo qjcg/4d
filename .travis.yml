@@ -17,13 +17,11 @@ env:
 
 before_install:
   - mkdir -p ${DSTDIR}
-  - NAME=$FPREFIX_$GOOS_$GOARCH echo DEBUG NAME value is $NAME
 
 script:
   - go test -v ./...
   - go build -o ${FPREFIX}_${GOOS}_${GOARCH}
-  - test $GOOS != "windows" && tar -vzcf ${DSTDIR}/${FPREFIX}_${GOOS}_${GOARCH}.tgz ${FPREFIX}_${GOOS}_${GOARCH}
-  - test $GOOS == "windows" && zip ${DSTDIR}/${FPREFIX}_${GOOS}_${GOARCH}.zip ${FPREFIX}_${GOOS}_${GOARCH}
+  - tar -vzcf ${DSTDIR}/${FPREFIX}_${GOOS}_${GOARCH}.tgz ${FPREFIX}_${GOOS}_${GOARCH}
 
 deploy:
   provider: releases
