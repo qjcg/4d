@@ -2,19 +2,18 @@ language: go
 go:
 - 1.x
 env:
-  - APP=4d
-  - FPREFIX=${APP}_${TRAVIS_TAG}
+  - FPREFIX=4d_${TRAVIS_TAG}
 script:
 - go test -v
 - GOARCH=amd64 go build -o ${FPREFIX}_amd64
 - GOARCH=arm go build -o ${FPREFIX}_arm
 - GOARCH=mips GOMIPS=softfloat go build -o ${FPREFIX}_mipsSF
-- mv ${APP}* /tmp
+- mv ${FPREFIX}* /tmp
 after_success:
 - cd /tmp
 - tar -vzcf ${FPREFIX}_linux_amd64.tgz ${FPREFIX}_amd64
 - tar -vzcf ${FPREFIX}_linux_arm.tgz ${FPREFIX}_arm
-- tar -vzcf ${FPREFIX}_linux_mips_softfloat.tgz ${FPREFIX}_mipsSF
+- tar -vzcf ${FPREFIX}_linux_mipsSF.tgz ${FPREFIX}_mipsSF
 deploy:
   provider: releases
   api_key:
