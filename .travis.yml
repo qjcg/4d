@@ -22,13 +22,15 @@ script:
   - go build -o ${FNAME}
   - tar -vzcf ${FNAME}.tgz ${FNAME}
 
-after_success: []
+after_success:
+  - mv *.tgz /tmp/
+
 deploy:
   provider: releases
   api_key:
     secure: X6ihaSrHeeCunRzgOxKyfKq3063OXDT96cnwdXk/f37YXtEZM7FyC32hiAsUU9+0yfvxkBZsgaKFUk5aEpzFt5NK/fbSiCULIwaZh434HAiFNhLE/IjHyBtOp0D0m5kt6SwhP1fyr1iRS4aDfT30GgvOgDn8cjHDwafjnEGFFxQ=
   skip_cleanup: true
   file_glob: true
-  file: *.tgz
+  file: /tmp/*.tgz
   on:
     tags: true
