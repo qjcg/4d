@@ -1,23 +1,27 @@
 language: go
 go:
 - 1.x
+env:
+  - APP=4d
+  - FPREFIX=${APP}_${TRAVIS_TAG}
 script:
 - go test -v
-- GOARCH=amd64 go build -o 4d.amd64
-- GOARCH=arm go build -o 4d.arm
-- GOARCH=mips GOMIPS=softfloat go build -o 4d.mips
-- mv 4d* $HOME/gopath/bin/
+- GOARCH=amd64 go build -o ${FPREFIX}_amd64
+- GOARCH=arm go build -o ${FPREFIX}_arm
+- GOARCH=mips GOMIPS=softfloat go build -o ${FPREFIX}_mipsSF
+- mv ${APP}* /tmp
 after_success:
-- tar -C $HOME/gopath/bin -vzcf /tmp/4d_linux_amd64.tgz 4d.amd64
-- tar -C $HOME/gopath/bin -vzcf /tmp/4d_linux_arm.tgz 4d.arm
-- tar -C $HOME/gopath/bin -vzcf /tmp/4d_linux_mips.tgz 4d.mips
+- cd /tmp
+- tar -vzcf ${FPREFIX}_linux_amd64.tgz ${FPREFIX}_amd64
+- tar -vzcf ${FPREFIX}_linux_arm.tgz ${FPREFIX}_arm
+- tar -vzcf ${FPREFIX}_linux_mips_softfloat.tgz ${FPREFIX}_mipsSF
 deploy:
   provider: releases
   api_key:
     secure: X6ihaSrHeeCunRzgOxKyfKq3063OXDT96cnwdXk/f37YXtEZM7FyC32hiAsUU9+0yfvxkBZsgaKFUk5aEpzFt5NK/fbSiCULIwaZh434HAiFNhLE/IjHyBtOp0D0m5kt6SwhP1fyr1iRS4aDfT30GgvOgDn8cjHDwafjnEGFFxQ=
   file:
-    - /tmp/4d_linux_amd64.tgz
-    - /tmp/4d_linux_arm.tgz
-    - /tmp/4d_linux_mips.tgz
+    - /tmp/${FPREFIX}_linux_amd64.tgz
+    - /tmp/${FPREFIX}_linux_arm.tgz
+    - /tmp/${FPREFIX}_linux_mipsSF.tgz
   on:
     tags: true
