@@ -1,26 +1,34 @@
 language: go
 go:
-- 1.x
+  - 1.x
+
 env:
-  - FPREFIX=4d_${TRAVIS_TAG}
+  - GOOS=linux   GOARCH=386
+  - GOOS=linux   GOARCH=amd64
+  - GOOS=linux   GOARCH=arm
+  - GOOS=linux   GOARCH=arm64
+  - GOOS=linux   GOARCH=mips  GOMIPS=softfloat
+
+  - GOOS=darwin  GOARCH=amd64
+  - GOOS=windows GOARCH=amd64
+
+  - GOOS=freebsd GOARCH=amd64
+  - GOOS=openbsd GOARCH=amd64
+  - GOOS=plan9   GOARCH=amd64
+
 script:
-- go test -v
-- GOARCH=amd64 go build -o ${FPREFIX}_amd64
-- GOARCH=arm go build -o ${FPREFIX}_arm
-- GOARCH=mips GOMIPS=softfloat go build -o ${FPREFIX}_mipsSF
-- mv ${FPREFIX}* /tmp
-after_success:
-- cd /tmp
-- tar -vzcf ${FPREFIX}_linux_amd64.tgz ${FPREFIX}_amd64
-- tar -vzcf ${FPREFIX}_linux_arm.tgz ${FPREFIX}_arm
-- tar -vzcf ${FPREFIX}_linux_mipsSF.tgz ${FPREFIX}_mipsSF
+  - go test -v ./...
+  - export FNAME=4d_${TRAVIS_TAG}_${GOOS}_${GOARCH}
+  - go build -o ${FNAME}
+  - tar -vzcf ${FNAME}.tgz ${FNAME}
+
+after_success: []
 deploy:
   provider: releases
   api_key:
     secure: X6ihaSrHeeCunRzgOxKyfKq3063OXDT96cnwdXk/f37YXtEZM7FyC32hiAsUU9+0yfvxkBZsgaKFUk5aEpzFt5NK/fbSiCULIwaZh434HAiFNhLE/IjHyBtOp0D0m5kt6SwhP1fyr1iRS4aDfT30GgvOgDn8cjHDwafjnEGFFxQ=
-  file:
-    - /tmp/${FPREFIX}_linux_amd64.tgz
-    - /tmp/${FPREFIX}_linux_arm.tgz
-    - /tmp/${FPREFIX}_linux_mipsSF.tgz
+  skip_cleanup: true
+  file_glob: true
+  file: *.tgz
   on:
     tags: true
