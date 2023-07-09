@@ -12,7 +12,7 @@ A simple CLI stopwatch.
 ## Install
 
 ```sh
-go get -u github.com/qjcg/4d
+go install github.com/qjcg/4d@latest
 ```
 
 
