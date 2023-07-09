@@ -1,5 +1,5 @@
 // A simple CLI stopwatch.
-package main // import "github.com/qjcg/4d"
+package main
 
 import (
 	"fmt"
